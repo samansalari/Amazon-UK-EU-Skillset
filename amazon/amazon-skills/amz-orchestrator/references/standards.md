@@ -125,7 +125,7 @@ Evergreen products still get an order-by date when peak-season fees or holidays 
 
 ## 9. Paths
 
-Paths written inside a SKILL.md (`scripts/...`, `assets/...`, `references/...`) are relative to that
+Paths written inside a specialist's `GUIDE.md` (`scripts/...`, `assets/...`, `references/...`) are relative to that
 skill's own folder. `profile.md`, `shortlist.md` and `candidates/...` are relative to the workspace
 `amazon-business/`. Neither is the shell's working directory: build the full path before running a
 script, and never assume the session was opened in either folder.

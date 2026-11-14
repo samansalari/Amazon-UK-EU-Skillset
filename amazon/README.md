@@ -2,7 +2,7 @@
 
 # Amazon UK/EU Selling Suite & Business Hub (`/amazon`)
 
-Version: 2026-11-14.5 — changes are listed at the end of this file.
+Version: 2026-11-14.7 — changes are listed at the end of this file.
 
 Unified Amazon UK and EU private-label selling system co-locating the complete **10-stage skill suite** (`amazon-skills/`) and the live **business workspace & research data** (`amazon-business/`) together in one folder.
 
@@ -132,6 +132,13 @@ unzip amazon.zip -d ~/.claude/skills/
 
 ## Changes
 
+- **2026-11-14.7** — entry file rewritten so an agent finds and uses the whole suite on its own: a
+  six-step load protocol (rules, business data, every relevant guide in full, the files each guide
+  names, stage check, and a visible `Skill files used:` line), a capability map from what the user
+  asks to the guide, references, templates and scripts to open, and recipes for requests that span
+  several guides. Checked by running fresh agents on real requests.
+- **2026-11-14.6** — the Claude apps accept exactly one `SKILL.md` per zip, so each specialist's
+  instructions file is now `GUIDE.md` (`amazon-skills/amz-*/GUIDE.md`). Content unchanged.
 - **2026-11-14.5** — packaged as one upload-ready `amazon.zip` for the Claude apps: description cut
   to under 200 characters, no links in the zip, and a rule for working when the skill folder is
   read-only (work on a copy of the snapshot, hand changed files back).

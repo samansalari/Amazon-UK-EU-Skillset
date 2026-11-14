@@ -10,7 +10,7 @@
 Unit of analysis: ONE SHIPPED UNIT (returns are netted inside it).
 All money is GBP except the two *_supplier_ccy fields.
 Every rate and fee is an input: this script looks nothing up. Verify each against its live source
-and record it in the "sources" block. Field meanings: ../assets/inputs.example.json, ../SKILL.md.
+and record it in the "sources" block. Field meanings: ../assets/inputs.example.json, ../GUIDE.md.
 """
 import json
 import sys

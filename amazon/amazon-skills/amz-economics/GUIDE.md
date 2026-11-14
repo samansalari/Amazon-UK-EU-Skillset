@@ -112,9 +112,19 @@ in — the supplier unit price. Report them as `MODEL`, described as screening c
 written quote must pass, not a profit forecast. A negative ceiling is a rejection. A planning price
 chosen inside an observed band is `ASSUMED`, not `OBS`; say which listings bound the band.
 Stage 6: any unsourced fee, duty rate or quote keeps the candidate at "Needs more evidence".
+A quotation given verbally or in a chat is `SUPPLIER` and may be run through the full report as a
+screening model, said to be one; a stage-6 pass needs written quotations. With no measured sales,
+give `monthly_units` three `ASSUMED` rates across the scenarios and say that profit per unit does
+not depend on them — only overheads, cash and reorder timing do. If the profile states the profit
+floor only as a percentage, leave `min_profit_per_unit_gbp` at 0, set `target_margin`, and ignore
+the "price that meets profit floor" row. Costs the quote leaves out (inspection, UK delivery to
+the fulfilment centre, payment and FX charges) are entered as 0 only with a note that they are
+missing, never silently.
 
 ## 9. Stop conditions and rejection criteria
-Stop if fees or duty cannot be verified today. Reject when the conservative scenario is below the
+Stop if fees or duty cannot be verified today — unless the workspace already holds them with a
+source and a date within about 30 days, in which case reuse them for screening, quote that date,
+and re-verify before any step that commits money. Reject when the conservative scenario is below the
 profit floor with no credible lever, break-even ACoS is too low to survive ad learning, or the
 initial cash requirement exceeds deployable capital. Pause when the answer hinges on one
 `ASSUMED` input: name the cheapest way to measure it.

@@ -17,12 +17,10 @@ Unofficial. Not affiliated with Amazon. Not legal, tax or financial advice.
   ·
   <a href="https://samansalari.github.io/Amazon-UK-EU-Skillset/#/skills">Read a skill</a>
   ·
-  <a href="https://samansalari.github.io/Amazon-UK-EU-Skillset/#/share">Copy a post</a>
-  ·
   <a href="amazon.zip">Download amazon.zip</a>
 </p>
 
-[![version](https://img.shields.io/badge/suite-2026--11--14.5-1c1814)](amazon/README.md)
+[![version](https://img.shields.io/badge/suite-2026--11--14.7-1c1814)](amazon/README.md)
 [![stages](https://img.shields.io/badge/stages-10-c56a32)](https://samansalari.github.io/Amazon-UK-EU-Skillset/#/desk)
 [![calculators](https://img.shields.io/badge/calculators-3-1e6b45)](https://samansalari.github.io/Amazon-UK-EU-Skillset/#/numbers)
 
@@ -34,16 +32,16 @@ Every fee, duty and lead time is an input with a source and a date. The scripts 
 
 | Stage | Skill | The question it has to answer |
 | --- | --- | --- |
-| 1–2 | [amz-discovery](amazon/amazon-skills/amz-discovery/SKILL.md) | Is there demand worth a closer look? |
-| 3 | [amz-validation](amazon/amazon-skills/amz-validation/SKILL.md) | Can a new listing actually enter? |
-| 4 | [amz-sourcing](amazon/amazon-skills/amz-sourcing/SKILL.md) | Can a supplier make this, like for like? |
-| 5 | [amz-compliance](amazon/amazon-skills/amz-compliance/SKILL.md) | Is it legal to sell, and whose IP is it? |
-| 6 | [amz-economics](amazon/amazon-skills/amz-economics/SKILL.md) | What does one shipped unit really make? |
-| 7 and 10 | [amz-inventory](amazon/amazon-skills/amz-inventory/SKILL.md) | How many units, and when to reorder? |
-| 8 | [amz-listing](amazon/amazon-skills/amz-listing/SKILL.md) | Does the listing say what buyers need? |
-| 8 | [amz-pricing](amazon/amazon-skills/amz-pricing/SKILL.md) | What price still clears the floor? |
-| 9 | [amz-ads](amazon/amazon-skills/amz-ads/SKILL.md) | What ad spend still makes a profit? |
-| All | [amz-orchestrator](amazon/amazon-skills/amz-orchestrator/SKILL.md) | What is the next cheapest question? |
+| 1–2 | [amz-discovery](amazon/amazon-skills/amz-discovery/GUIDE.md) | Is there demand worth a closer look? |
+| 3 | [amz-validation](amazon/amazon-skills/amz-validation/GUIDE.md) | Can a new listing actually enter? |
+| 4 | [amz-sourcing](amazon/amazon-skills/amz-sourcing/GUIDE.md) | Can a supplier make this, like for like? |
+| 5 | [amz-compliance](amazon/amazon-skills/amz-compliance/GUIDE.md) | Is it legal to sell, and whose IP is it? |
+| 6 | [amz-economics](amazon/amazon-skills/amz-economics/GUIDE.md) | What does one shipped unit really make? |
+| 7 and 10 | [amz-inventory](amazon/amazon-skills/amz-inventory/GUIDE.md) | How many units, and when to reorder? |
+| 8 | [amz-listing](amazon/amazon-skills/amz-listing/GUIDE.md) | Does the listing say what buyers need? |
+| 8 | [amz-pricing](amazon/amazon-skills/amz-pricing/GUIDE.md) | What price still clears the floor? |
+| 9 | [amz-ads](amazon/amazon-skills/amz-ads/GUIDE.md) | What ad spend still makes a profit? |
+| All | [amz-orchestrator](amazon/amazon-skills/amz-orchestrator/GUIDE.md) | What is the next cheapest question? |
 
 Start at [`amazon/SKILL.md`](amazon/SKILL.md). That is `/amazon`.
 
@@ -99,42 +97,6 @@ cp -R Amazon-UK-EU-Skillset/amazon ~/.claude/skills/amazon
 | Gemini / Antigravity | `~/.gemini/config/skills/amazon` |
 
 Then type `/amazon` or `$amazon`.
-
-## Share
-
-<details>
-<summary><strong>Post for X</strong></summary>
-
-```text
-I published the Amazon UK/EU skill suite I use before spending money on stock.
-
-10 stages, from discovery to reorder. Calculators for landed cost, VAT and safety stock. No invented fees.
-
-https://samansalari.github.io/Amazon-UK-EU-Skillset/
-```
-
-[Open X with this text](https://twitter.com/intent/tweet?text=I%20published%20the%20Amazon%20UK%2FEU%20skill%20suite%20I%20use%20before%20spending%20money%20on%20stock.%0A%0A10%20stages%2C%20from%20discovery%20to%20reorder.%20Calculators%20for%20landed%20cost%2C%20VAT%20and%20safety%20stock.%20No%20invented%20fees.%0A%0Ahttps%3A%2F%2Fsamansalari.github.io%2FAmazon-UK-EU-Skillset%2F)
-
-</details>
-
-<details>
-<summary><strong>Post for LinkedIn</strong></summary>
-
-```text
-I published an unofficial skill suite for Amazon UK and EU private-label decisions.
-
-It is the workflow I want an agent to follow before anyone spends money on samples or stock: discover, validate, source, check the law, run the unit economics, size the order, write the listing, set the price, plan the ads, then reorder.
-
-The calculators do not look up live fees. Every rate is an input with a source. Example numbers are labelled as examples.
-
-https://samansalari.github.io/Amazon-UK-EU-Skillset/
-```
-
-[Open LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsamansalari.github.io%2FAmazon-UK-EU-Skillset%2F)
-
-</details>
-
-Card for the link preview: [`docs/social-card.png`](docs/social-card.png), 1200×630.
 
 ## What this is not
 

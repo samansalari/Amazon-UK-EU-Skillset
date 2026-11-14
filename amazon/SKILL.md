@@ -5,62 +5,123 @@ description: Amazon UK/EU private-label suite. Use for /amazon, product research
 
 # /amazon — Amazon UK/EU Selling Suite & Business Hub
 
-A unified decision system for sourcing from China and selling on Amazon UK and European marketplaces, paired with live business workspace data. Success is a buying decision the evidence supports — not a list of product ideas.
+A decision system for sourcing from China and selling on Amazon UK and European marketplaces,
+kept together with the user's live research. Success is a buying decision the evidence supports —
+not a list of product ideas.
 
-## Workspace & Folder Layout
+## How to use this skill — read this first
 
-Both skills and business data are co-located in this single unified folder:
+This file is only the router. The working knowledge is in ten guides under `amazon-skills/`, with
+shared rules, templates and three calculators beside them. You are expected to open those files
+yourself. An answer written from this file alone, or from general knowledge of Amazon selling, is
+a failed run: the guides hold the evidence rules, gates and calculations that make the output
+trustworthy.
+
+Every run, in this order:
+
+1. **Load the rules.** Read `amazon-skills/amz-orchestrator/GUIDE.md` and
+   `amazon-skills/amz-orchestrator/references/standards.md` in full.
+2. **Load the business.** Find the workspace (see "Workspace") and read `profile.md` and
+   `shortlist.md`; for a named candidate, also `candidates/<slug>/handoff.md` and `inputs.json`.
+   If the request itself changes the profile — a new category, budget or constraint — record it
+   in `profile.md` as `[USER <date>]`. Ask a question first only when the answer changes the route
+   (which animal, which marketplace, packs or pieces); otherwise proceed and state the assumption.
+3. **Load every guide the request touches.** Pick them from the capability map and read each one
+   in full before acting — the whole file, not its headings. Most real requests need more than one.
+4. **Use the files the guide points to.** When a step names a template, reference or script, open
+   or run it at that step. All arithmetic goes through the scripts, never by hand or from memory.
+5. **Respect the stage.** Check the candidate's stage and open gates before doing later-stage work.
+   If the request jumps ahead (a listing for a product that has not passed validation), say so,
+   do the earliest incomplete stage first, or state plainly what is being skipped and the risk.
+   A later-stage deliverable asked for early may be given only as a **provisional draft**: say so
+   at the top, leave `[ ]` for everything not yet evidenced (materials, dimensions, claims, costs),
+   and list what must be true before it can be used. An open hard gate still blocks any spend.
+6. **Show what was used.** Start the reply with two lines:
+   `Skill files used:` every guide, reference, template and script actually opened or run;
+   `Data access:` what this session can and cannot reach (`standards.md` section 4).
+   If the map called for a file that was not opened, say why.
+
+The user may write in any language, often Persian. Route by meaning, and write the whole reply in
+the user's language: explanations, headings, table headers, recommendations and the closing
+summary. Only four things stay as they are: evidence labels (`[OBS]`, `[MODEL]`…), file and script
+names, script output, and text written for a marketplace or a supplier (listing copy, search
+terms, the supplier enquiry). The two opening line names (`Skill files used:`, `Data access:`)
+stay in English; what follows them is in the user's language.
+
+If the request matches nothing in the map, or the user asks what the suite can do
+(`/amazon help`), present the capability map in plain words and ask which they want.
+
+## Capability map
+
+Guides are at `amazon-skills/<name>/GUIDE.md`. References are in
+`amazon-skills/amz-orchestrator/references/`. Scripts and templates are in each skill's `scripts/`
+and `assets/` folders.
+
+| The user wants… | Read this guide | Also open or run |
+|---|---|---|
+| Status, "where are we", what to do next | `amz-orchestrator` | `stage-gates.md`; `scorecard.py` on the workspace `scorecard.json` |
+| To get started; what to obtain (EORI, accounts, tools, insurance, trade mark) | `amz-orchestrator` | `onboarding.md` (questions, setup checklist, profile template) |
+| Product ideas, niches, "what should I sell", a quick screen of an idea or ASIN | `amz-discovery` | `live-sources.md`; `unit_economics.py --ceiling`; `scorecard.md` + `scorecard.py` |
+| Whether a product is really viable: competitors, keywords, review mining, saturation | `amz-validation` | `live-sources.md`; `scorecard.md` + `scorecard.py` |
+| Suppliers, Alibaba / 1688, MOQ, quotations, samples, Incoterms, inspection, "is this supplier legit" | `amz-sourcing` | `assets/supplier-enquiry.md`; `assets/quotation-comparison.csv` |
+| "Is it legal to sell": UKCA / CE, GPSR, labelling, testing, EPR, trade marks, patents, restricted categories | `amz-compliance` | `stage-gates.md` (hard gates) |
+| Profit, margin, landed cost, FBA fees, duty, VAT, break-even, cash needed, ROI, FBA vs FBM | `amz-economics` | `assets/inputs.example.json`; `unit_economics.py` (full report, `--ceiling`, `--vat-compare`); `live-sources.md` |
+| Title, bullets, description, search terms, A+ content, image brief | `amz-listing` | — |
+| Price, launch price, vouchers, deals, bundles, when to raise or cut | `amz-pricing` | `unit_economics.py` for every price proposed |
+| PPC: campaigns, keywords, bids, budget, ACoS / TACoS, negatives, scaling | `amz-ads` | `unit_economics.py` for break-even ACoS |
+| How many to order, reorder point, safety stock, slow stock, variations, expanding to Europe | `amz-inventory` | `scripts/reorder.py`; `unit_economics.py` for cash and reorder funding |
+| Go / no-go, comparing products, a decision report | `amz-orchestrator` | `decision-report.md`; `scorecard.md`; `stage-gates.md`; `scorecard.py` |
+
+### Requests that span guides
+
+Work them in stage order and write one hand-off block per guide used.
+
+- "Find a product and tell me if it makes money" → `amz-discovery`, then `amz-economics`
+  (`--ceiling`), then the scorecard.
+- A quotation has arrived → `amz-sourcing` (comparison), `amz-economics` (full report and
+  `--vat-compare`), `amz-inventory` (order size, cash, reorder).
+- "Should I place this order?" → `amz-orchestrator` (stage and gates), `amz-compliance`,
+  `amz-economics`, `amz-inventory`, then the decision report.
+- "Prepare the launch" → `amz-listing`, `amz-pricing`, `amz-ads` — after confirming stages 3–6 are
+  done for that candidate.
+- Anything electrical, battery-powered, cosmetic, food-contact, for children, or resembling a
+  branded or patented design → add `amz-compliance`, whatever else was asked.
+- Any mention of Germany, France or another marketplace → the same guides again for that country,
+  with its own prices, fees, VAT and rules; never reuse UK figures.
+- A product type the compliance guide gives no example for (pet products, sports goods, car
+  accessories) still gets a screen: general product safety, any claim the listing would make,
+  materials, and Amazon's category rules, from official sources. Never assume no regime applies.
+
+## Workspace
 
 ```
-amazon/
-  SKILL.md                         # This entry point (/amazon)
-  README.md                        # Complete suite documentation
-  amazon-business/                 # Live seller workspace & research
-    profile.md                     # Seller parameters, capital, VAT, profit floor
-    shortlist.md                   # Ranked candidates, stage, open gates, next actions
-    scorecard.json                 # Active scorecard data
-    discovery-2026-11-14.md        # Observation evidence and ceiling models
-    candidates/<slug>/             # Per-candidate evidence, handoff, report
-  amazon-skills/                   # Orchestrator, nine specialist skills, three calculators
-    amz-orchestrator/              # Master workflow, gates, scorecard script
-    amz-discovery/                 # Stage 1-2: Product discovery & screening
-    amz-validation/                # Stage 3: Demand & competitor validation
-    amz-sourcing/                  # Stage 4: China supplier RFQ, quotes, samples
-    amz-compliance/                # Stage 5: UKCA/CE, GPSR, EPR, REACH, IP/patents
-    amz-economics/                 # Stage 6: Landed cost & unit economics script
-    amz-inventory/                 # Stage 7 & 10: Reorder calculator & stock buffers
-    amz-listing/                   # Stage 8: Copywriting, keywords, 7 image slots
-    amz-pricing/                   # Stage 8: Price ladder, offers, launch discounts
-    amz-ads/                       # Stage 9: Sponsored Products 4-campaign structure
-    amazon/                        # Superseded first entry point; older local installs only, do not follow
+amazon/                            # this skill
+  SKILL.md                         # this router — the only SKILL.md
+  README.md                        # layout, install, change log
+  amazon-skills/                   # ten guides, shared references, templates, three calculators
+    amz-orchestrator/              # workflow, standards, stage gates, scorecard, decision report
+    amz-discovery/  amz-validation/  amz-sourcing/  amz-compliance/  amz-economics/
+    amz-listing/  amz-pricing/  amz-ads/  amz-inventory/
+  amazon-business/                 # the user's live research
+    profile.md  shortlist.md  scorecard.json  discovery-<date>.md
+    candidates/<slug>/             # handoff.md, inputs.json, evidence.md, report.md
 ```
 
-Every path in this file goes through `amazon-skills/`, and the specialists reach each other with `../amz-...` inside it. A local install may also have root `amz-*` links into `amazon-skills/`; they are a convenience only, and the packaged zip has none.
+Every path in this file is relative to this skill's folder — `~/amazon` on the local install,
+wherever the skill is mounted in the Claude apps. Use full paths when running a script. The
+specialists reach each other with `../amz-...` inside `amazon-skills/`. A local install may also
+have root `amz-*` links and an older `amazon-skills/amazon/` folder; ignore both.
 
-## Step 1: Standards and Evidence Rules
+Locate `amazon-business/` in this order, and say which one was used:
 
-Always follow the shared standards before conducting research or calculations:
-- Core standards: `amazon-skills/amz-orchestrator/references/standards.md`
-- Hard stage gates: `amazon-skills/amz-orchestrator/references/stage-gates.md`
-- Scorecard criteria: `amazon-skills/amz-orchestrator/references/scorecard.md`
-- Where each official figure lives and how to capture it: `amazon-skills/amz-orchestrator/references/live-sources.md`
-- Label every figure with exactly one of the seven labels defined in `standards.md` section 1:
-  `OBS`, `USER`, `SUPPLIER`, `EST`, `MODEL`, `ASSUMED`, `UNKNOWN`. Never invent numbers.
+1. `./amazon-business/` in the current working directory.
+2. The `amazon-business/` inside this skill's folder.
+3. `~/amazon/amazon-business/` (local install only; the same folder as 2).
 
-All paths in this file are relative to this skill's folder — `~/amazon` on the local install,
-wherever the skill is mounted in the Claude apps. Use the full path, or change into that folder,
-before running a calculator from another directory.
-
-## Step 2: Locate Business Data
-
-Locate `amazon-business/` in this priority order:
-1. `./amazon-business/` in the user's current working directory (if opened in `~/amazon` or project root).
-2. `<skill_directory>/amazon-business/` (co-located in this suite).
-3. `~/amazon/amazon-business/` (local install only; a link to the same folder as 2).
-
-Never create a second profile silently. Always read existing parameters from `profile.md`. Say
-which workspace you used. The orchestrator states the same rule; if the two ever differ, this
-order wins.
+Never create a second profile silently. If none exists, run onboarding from
+`amazon-skills/amz-orchestrator/references/onboarding.md` before recommending anything. If several
+copies turn up (for example `amazon-business 2`), compare them, use the one with the newest files,
+say which, and never merge them silently.
 
 **Read-only workspace (the Claude apps).** An uploaded skill cannot be written to, so the
 `amazon-business/` inside it is a dated snapshot. If the user has attached a newer
@@ -68,72 +129,58 @@ order wins.
 copy the workspace to a writable folder and work on the copy; finish by giving the user the changed
 files, or a zip of the folder, to download. Tell them the snapshot inside the skill stays as it was
 until the skill is uploaded again. If the session has no browser or network access, say so under
-data access and work from the files and from exports the user pastes or attaches.
+`Data access:` and work from the files and from exports the user pastes or attaches — do not fill
+the gap from memory.
 
-## Step 3: Invocation Without Arguments or "status"
+**Working without live data.** Fee, duty and tax figures already in the workspace, with a source
+and a date within about 30 days, may be reused for screening, quoted with that date; re-verify
+them before any step that commits money. Product ideas cannot be evidenced offline: you may list
+directions worth checking, each marked as an untested hypothesis (`ASSUMED`), but not as
+candidates, and never with a score. Then tell the user exactly which pages to open or export so
+the run can continue — the paths are in `live-sources.md` — or ask for a session with a browser.
 
-When the user types `/amazon`, `/amazon status`, or asks for an overview:
-1. **Profile Summary**: 1-line recap of capital ceiling, deployable capital, entity, VAT status, profit floor, and target markets from `amazon-business/profile.md`.
-2. **Setup Status**: every item of the setup checklist in `amazon-skills/amz-orchestrator/references/onboarding.md`, with its status from `profile.md`, flagging those due at or before the next stage any live candidate is about to enter.
-3. **Shortlist Table**: Render current candidates from `amazon-business/shortlist.md` and `scorecard.json`:
-   - Candidate name
-   - Opportunity score / confidence %
-   - Stage reached, and one of the six classifications in `stage-gates.md`: Reject, Needs more
-     evidence, Ready for samples, Ready for a limited test order, Ready for launch planning, Ready
-     for scaling. (`scorecard.py` prints REJECT / PAUSE / NEEDS MORE EVIDENCE / PROGRESS — map those
-     to a classification per `scorecard.md`; they are not classifications themselves.)
-   - Open gates (blocking IP, compliance, safety)
-   - Selling window & order-by date
-   - Next step and its cost (`UNKNOWN` when no file states the cost — never an estimate from memory)
-   If a candidate has no order-by date on file, derive it per `standards.md` section 8 and label it `MODEL`.
-4. **Stale Data Warning**: Flag any observation older than about three months (the threshold in `standards.md` section 5).
-5. **Next Action**: Propose the single cheapest next step to resolve the primary open uncertainty. Await user confirmation before committing capital.
+## Status run — `/amazon` with no request, or "status"
 
-A status run only reads. It writes nothing; Step 6 applies to research and analysis runs.
+Report from the files and nothing else:
 
-## Step 4: Routing Requests With Arguments
+1. **Profile**: capital ceiling, deployable capital, entity, VAT status, profit floor, markets.
+2. **Setup**: every item of the checklist in `onboarding.md` with its status from `profile.md`,
+   flagging those due at or before the next stage any live candidate is about to enter.
+3. **Shortlist**, one row per candidate from `shortlist.md` and `scorecard.json`: opportunity score
+   and confidence; stage reached and one of the six classifications in `stage-gates.md` (Reject,
+   Needs more evidence, Ready for samples, Ready for a limited test order, Ready for launch
+   planning, Ready for scaling — `scorecard.py` prints REJECT / PAUSE / NEEDS MORE EVIDENCE /
+   PROGRESS, which map to a classification per `scorecard.md`); open gates; selling window and
+   order-by date (derive a missing order-by per `standards.md` section 8 and label it `MODEL`);
+   next step and its cost (`UNKNOWN` when no file states it — never an estimate from memory).
+4. **Stale data**: flag observations older than about three months.
+5. **Next action**: the single cheapest step that resolves the main open uncertainty. Wait for the
+   user's go-ahead before anything that commits money.
 
-When invoked with arguments, route to the appropriate specialist skill:
+A status run only reads; it writes nothing.
 
-| User Request Example | Specialist Skill | Focus |
-|---|---|---|
-| `/amazon find products in <category>` | `amazon-skills/amz-discovery` | Observed demand and entry difficulty, with numbers; cost ceiling; selling window |
-| `/amazon validate <candidate or ASIN>` | `amazon-skills/amz-validation` | Deep review mining, competitor flaws, disconfirmation |
-| `/amazon quotes <candidate>` | `amazon-skills/amz-sourcing` | 1688 / Alibaba RFQ, like-for-like quotes, sample tests |
-| `/amazon is this legal <product>` | `amazon-skills/amz-compliance` | UK/EU regulation, CE/UKCA, GPSR, IP/design patents |
-| `/amazon profit <candidate>` or `/amazon ceiling` | `amazon-skills/amz-economics` | Landed cost, net contribution margin, break-even |
-| `/amazon vat <candidate>` | `amazon-skills/amz-economics` (`--vat-compare`) | Profit per unit registered vs not; units a year at the threshold |
-| `/amazon listing <candidate>` | `amazon-skills/amz-listing` | Conversion-led copy, 7-slot visual brief, SEO |
-| `/amazon price <candidate>` | `amazon-skills/amz-pricing` | Price ladder, launch discount, minimum sustainable price |
-| `/amazon ads <candidate>` | `amazon-skills/amz-ads` | 4-campaign structure, break-even ACoS, max CPC |
-| `/amazon reorder` or `/amazon stock` | `amazon-skills/amz-inventory` | Reorder points, safety stock, lead times |
-| `/amazon report <candidate>` | `amazon-skills/amz-orchestrator` | Standard 18-section decision report (at any stage) |
-| `/amazon setup` | `amazon-skills/amz-orchestrator` | Setup checklist: every item, its status and the stage it is due |
-
-The table is examples, not a grammar: any free-text request is routed by the orchestrator's stage
-table. Each specialist's own `SKILL.md` is the authority for its stage; this file only routes.
-
-## Step 5: Calculators (Python 3 Standard Library)
-
-Run the verified calculators directly from terminal:
+## Calculators (Python 3, standard library only)
 
 ```bash
 # Unit economics: full report, or --ceiling (max cost a price can carry), or --vat-compare
 python3 amazon-skills/amz-economics/scripts/unit_economics.py <inputs.json> [--ceiling | --vat-compare]
 
-# Scorecard evaluation
-python3 amazon-skills/amz-orchestrator/scripts/scorecard.py amazon-business/scorecard.json
+# Opportunity score, evidence confidence and gates
+python3 amazon-skills/amz-orchestrator/scripts/scorecard.py <scorecard.json>
 
-# Reorder & safety stock calculations
+# Reorder point and safety stock
 python3 amazon-skills/amz-inventory/scripts/reorder.py --daily <avg> --sd-daily <sd> --lead <days> --sd-lead <sd> --on-hand <units>
 ```
 
-## Step 6: Session End & Handoff
+Each has `--selftest`. No fee, duty or tax rate is built in: every rate is an input with a source
+and a date. Never present the bundled example inputs as a product's numbers.
 
-At the end of any research or analysis step:
-1. Update `amazon-business/shortlist.md` with new findings.
-2. If evidence changed, update `amazon-business/scorecard.json` and re-run `scorecard.py`.
-3. Append the hand-off block from `standards.md` section 7 to the candidate's `handoff.md`,
+## End of a research or analysis run
+
+1. Update `shortlist.md`; if the evidence changed, update `scorecard.json` and re-run `scorecard.py`.
+2. Append the hand-off block from `standards.md` section 7 to the candidate's `handoff.md`,
    unchanged in shape: status (one of the six classifications), confidence with its reason, key
-   findings with labels, open gates, remaining uncertainties, next skill and the inputs it needs.
-4. State the selling window per `standards.md` section 8 and the cost of the next step.
+   findings with labels, open gates, remaining uncertainties, selling window, next skill and the
+   inputs it needs.
+3. Close the reply with: classification, confidence, open gates, the next required evidence and
+   what the next step costs.

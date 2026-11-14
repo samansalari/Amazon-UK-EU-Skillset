@@ -133,7 +133,7 @@ label.field { display: grid; grid-template-columns: 1fr 140px; gap: 8px; align-i
 label.field input[type="number"] { width: 100%; background: transparent; color: inherit; border: 1px solid var(--line-light); border-radius: 8px; padding: 6px 8px; }
 body.paper label.field input { border-color: var(--line); background: var(--paper); }
 .warn { background: rgba(197, 106, 50, 0.12); border: 1px solid rgba(197, 106, 50, 0.4); border-radius: 12px; padding: 10px 12px; font-size: 0.92rem; }
-.sharebox, .install pre {
+.install pre {
   font-family: var(--mono); font-size: 0.84rem; white-space: pre-wrap;
   background: #241e17; color: #f6f1e7; border-radius: 12px; padding: 12px;
 }

@@ -1,19 +1,16 @@
 const GH = "https://github.com/samansalari/Amazon-UK-EU-Skillset";
 const PAGES = "https://samansalari.github.io/Amazon-UK-EU-Skillset/";
-const SHARE_X = "I published the Amazon UK/EU skill suite I use before spending money on stock.\n\n10 stages, from discovery to reorder. Calculators for landed cost, VAT and safety stock. No invented fees.\n\n" + PAGES;
-const SHARE_LI = "I published an unofficial skill suite for Amazon UK and EU private-label decisions.\n\nIt is the workflow I want an agent to follow before anyone spends money on samples or stock: discover, validate, source, check the law, run the unit economics, size the order, write the listing, set the price, plan the ads, then reorder.\n\nThe calculators do not look up live fees. Every rate is an input with a source. Example numbers are labelled as examples.\n\nRead it and run the numbers here:\n" + PAGES;
-
 const PIPELINE = [
-  ["1–2", "Discover", "amz-discovery", "Is there demand worth a closer look?", "amazon-skills/amz-discovery/SKILL.md"],
-  ["3", "Validate", "amz-validation", "Can a new listing actually enter?", "amazon-skills/amz-validation/SKILL.md"],
-  ["4", "Source", "amz-sourcing", "Can a supplier make this, like for like?", "amazon-skills/amz-sourcing/SKILL.md"],
-  ["5", "Comply", "amz-compliance", "Is it legal to sell, and whose IP is it?", "amazon-skills/amz-compliance/SKILL.md"],
-  ["6", "Cost", "amz-economics", "What does one shipped unit really make?", "amazon-skills/amz-economics/SKILL.md"],
-  ["7 · 10", "Order", "amz-inventory", "How many units, and when to reorder?", "amazon-skills/amz-inventory/SKILL.md"],
-  ["8", "List", "amz-listing", "Does the listing say what buyers need?", "amazon-skills/amz-listing/SKILL.md"],
-  ["8", "Price", "amz-pricing", "What price still clears the floor?", "amazon-skills/amz-pricing/SKILL.md"],
-  ["9", "Ads", "amz-ads", "What ad spend still makes a profit?", "amazon-skills/amz-ads/SKILL.md"],
-  ["All", "Orchestrate", "amz-orchestrator", "What is the next cheapest question?", "amazon-skills/amz-orchestrator/SKILL.md"]
+  ["1–2", "Discover", "amz-discovery", "Is there demand worth a closer look?", "amazon-skills/amz-discovery/GUIDE.md"],
+  ["3", "Validate", "amz-validation", "Can a new listing actually enter?", "amazon-skills/amz-validation/GUIDE.md"],
+  ["4", "Source", "amz-sourcing", "Can a supplier make this, like for like?", "amazon-skills/amz-sourcing/GUIDE.md"],
+  ["5", "Comply", "amz-compliance", "Is it legal to sell, and whose IP is it?", "amazon-skills/amz-compliance/GUIDE.md"],
+  ["6", "Cost", "amz-economics", "What does one shipped unit really make?", "amazon-skills/amz-economics/GUIDE.md"],
+  ["7 · 10", "Order", "amz-inventory", "How many units, and when to reorder?", "amazon-skills/amz-inventory/GUIDE.md"],
+  ["8", "List", "amz-listing", "Does the listing say what buyers need?", "amazon-skills/amz-listing/GUIDE.md"],
+  ["8", "Price", "amz-pricing", "What price still clears the floor?", "amazon-skills/amz-pricing/GUIDE.md"],
+  ["9", "Ads", "amz-ads", "What ad spend still makes a profit?", "amazon-skills/amz-ads/GUIDE.md"],
+  ["All", "Orchestrate", "amz-orchestrator", "What is the next cheapest question?", "amazon-skills/amz-orchestrator/GUIDE.md"]
 ];
 
 const EXAMPLE = {
@@ -101,20 +98,19 @@ function route() {
   const path = rest.join("/");
   document.body.classList.toggle("paper", view === "skills" || view === "workspace");
   document.querySelectorAll("[data-nav]").forEach((b) => b.setAttribute("aria-current", b.dataset.nav === view ? "page" : "false"));
-  const views = { desk: renderDesk, skills: () => renderDoc("skills", path || "SKILL.md"), numbers: () => renderNumbers(path || "unit"), workspace: () => renderDoc("workspace", path), install: renderInstall, share: renderShare };
+  const views = { desk: renderDesk, skills: () => renderDoc("skills", path || "SKILL.md"), numbers: () => renderNumbers(path || "unit"), workspace: () => renderDoc("workspace", path), install: renderInstall };
   (views[view] || renderDesk)();
   main.focus && main.setAttribute("tabindex", "-1");
 }
 
 function renderDesk() {
   main.innerHTML = `
-    <p class="kicker">Amazon UK / EU · version 2026-11-14.5</p>
+    <p class="kicker">Amazon UK / EU · version 2026-11-14.7</p>
     <h1>A buying decision the evidence supports.</h1>
     <p class="lede">Ten stages for sourcing from China and selling on Amazon UK and Europe. Read the skills. Run the calculators. Install them in your agent.</p>
     <div class="row">
       <button class="cta" type="button" data-go="numbers">Run the numbers</button>
       <button class="ghost" type="button" data-go="skills">Read the skills</button>
-      <button class="ghost" type="button" data-go="share">Copy a post</button>
     </div>
     <p class="note">Unofficial. Not affiliated with Amazon. Not legal, tax or financial advice. The scripts look nothing up. Example figures are labelled EXAMPLE.</p>
     <div class="pipeline" id="pipe"></div>
@@ -344,32 +340,6 @@ cp -R Amazon-UK-EU-Skillset/amazon ~/.claude/skills/amazon</pre></div>
       </tbody>
     </table>
     <p>Then type <code>/amazon</code> or <code>$amazon</code>. The entry file routes the request. It does not invent fees.</p></div>`;
-}
-function renderShare() {
-  main.innerHTML = `
-    <p class="kicker">Share</p>
-    <h1>Ready to post.</h1>
-    <p class="lede">The link card uses the buying-desk image. Paste either draft, or open the network composer with the text filled in.</p>
-    <h2>X</h2>
-    <div class="sharebox" id="sx"></div>
-    <div class="row"><button class="cta" type="button" id="cx">Copy</button><a class="ghost" id="tx" href="#">Open X</a></div>
-    <h2>LinkedIn</h2>
-    <div class="sharebox" id="sl"></div>
-    <div class="row"><button class="cta" type="button" id="cl">Copy</button><a class="ghost" id="tl" href="#">Open LinkedIn</a></div>
-    <p class="note"><a href="social-card.png">Download the card</a> · 1200×630</p>`;
-  document.getElementById("sx").textContent = SHARE_X;
-  document.getElementById("sl").textContent = SHARE_LI;
-  document.getElementById("tx").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(SHARE_X);
-  document.getElementById("tl").href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(PAGES);
-  document.getElementById("cx").addEventListener("click", () => copy(SHARE_X, "cx"));
-  document.getElementById("cl").addEventListener("click", () => copy(SHARE_LI, "cl"));
-}
-function copy(text, id) {
-  navigator.clipboard.writeText(text).then(() => {
-    const b = document.getElementById(id);
-    b.textContent = "Copied";
-    setTimeout(() => { b.textContent = "Copy"; }, 1200);
-  });
 }
 
 document.querySelectorAll("[data-nav]").forEach((b) => b.addEventListener("click", () => go(b.dataset.nav)));
