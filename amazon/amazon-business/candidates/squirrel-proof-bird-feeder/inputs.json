@@ -1,0 +1,36 @@
+{
+  "_note": "Stage-2 ceiling inputs, amazon.co.uk. No supplier quote, order size, freight or FX exists yet, so the purchase and import fields are left out on purpose. Run with --ceiling. Fill the rest before the stage-6 report.",
+
+  "vat_registered": false,
+  "vat_rate": 0.20,
+  "vat_threshold_gbp": 90000,
+  "duty_rate": 0.02,
+
+  "selling_price_gbp": 25.99,
+  "referral_rate": 0.15,
+  "fulfilment_fee_gbp": 3.33,
+  "storage_per_unit_month_gbp": 0.05,
+  "months_in_storage": 3,
+  "return_rate": 0.03,
+  "resellable_return_frac": 0.5,
+  "tacos": 0.12,
+  "target_margin": 0.15,
+
+  "scenarios": {
+    "conservative": {"selling_price_gbp": 22.99, "fulfilment_fee_gbp": 3.56, "tacos": 0.18, "return_rate": 0.05, "target_margin": 0.10},
+    "base": {}
+  },
+
+  "sources": {
+    "vat_registered": "USER, profile.md, 2026-11-14",
+    "vat_threshold_gbp": "OBS, gov.uk/register-for-vat, 2026-11-14",
+    "duty_rate": "OBS rate for commodity 7326 90 98 90 origin CN, trade-tariff.service.gov.uk, 2026-11-14; the code itself is ASSUMED until a broker confirms",
+    "selling_price_gbp": "base OBS: three listings at 25.99 (B0GFNNLHVS, B08T5M7KLN, B0FG7VQH99), amazon.co.uk, 2026-11-14; conservative 22.99 is ASSUMED, a discount below that cluster",
+    "referral_rate": "OBS, FBA rate card effective 1 July 2026, Lawn and Garden, first column read as UK - confirm in Seller Central",
+    "fulfilment_fee_gbp": "OBS fee x 1.02 surcharge: base standard parcel <=1.4 kg 3.26, conservative small oversize 3.49 (rate card effective 1 July 2026; surcharge sell.amazon.co.uk/pricing 2026-11-14). Packaged size and weight are ASSUMED - no specification yet",
+    "storage_per_unit_month_gbp": "ASSUMED placeholder; packaged volume unknown",
+    "return_rate": "ASSUMED",
+    "tacos": "ASSUMED planning values 12% / 18%; no ad data",
+    "target_margin": "USER profit floor 10-15%, read as contribution after ads / net revenue (ASSUMED interpretation, to confirm)"
+  }
+}

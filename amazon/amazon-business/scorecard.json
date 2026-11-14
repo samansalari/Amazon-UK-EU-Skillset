@@ -1,0 +1,88 @@
+{
+  "_note": "Stage 2 screen, amazon.co.uk, 2026-11-14. Scores are [0-5, evidence H|M|L]; 5 is favourable. Evidence in discovery-2026-11-14.md. No supplier quotes and no sales-volume data yet, so unit_economics, capital and sourcing are graded L throughout.",
+  "min_score": 50,
+  "min_confidence": 0.6,
+  "candidates": [
+    {
+      "name": "Squirrel-proof bird feeder (locking lid)",
+      "scores": {
+        "unit_economics": [3, "L"],
+        "demand_quality": [4, "M"],
+        "competition_entry": [3, "M"],
+        "differentiation": [4, "M"],
+        "capital_requirements": [3, "L"],
+        "sourcing_reliability": [1, "L"],
+        "growth_potential": [3, "L"],
+        "compliance_burden": [4, "M"],
+        "operational_complexity": [3, "M"]
+      },
+      "gates": [
+        {"issue": "IP: registered designs and patents on squirrel-proof mechanisms (e.g. weight-activated shrouds) not yet searched", "severity": "blocking", "resolved": false}
+      ]
+    },
+    {
+      "name": "Heavy-duty garden waste bags (3-pack)",
+      "scores": {
+        "unit_economics": [2, "L"],
+        "demand_quality": [4, "M"],
+        "competition_entry": [3, "M"],
+        "differentiation": [3, "M"],
+        "capital_requirements": [4, "L"],
+        "sourcing_reliability": [1, "L"],
+        "growth_potential": [3, "L"],
+        "compliance_burden": [5, "M"],
+        "operational_complexity": [5, "M"]
+      },
+      "gates": []
+    },
+    {
+      "name": "Garden plant supports (half-round, 10-pack)",
+      "scores": {
+        "unit_economics": [2, "L"],
+        "demand_quality": [3, "L"],
+        "competition_entry": [4, "M"],
+        "differentiation": [3, "M"],
+        "capital_requirements": [4, "L"],
+        "sourcing_reliability": [1, "L"],
+        "growth_potential": [3, "L"],
+        "compliance_burden": [5, "M"],
+        "operational_complexity": [3, "M"]
+      },
+      "gates": []
+    },
+    {
+      "name": "Reusable car dehumidifier bags",
+      "scores": {
+        "unit_economics": [1, "L"],
+        "demand_quality": [4, "M"],
+        "competition_entry": [3, "M"],
+        "differentiation": [3, "M"],
+        "capital_requirements": [4, "L"],
+        "sourcing_reliability": [1, "L"],
+        "growth_potential": [2, "L"],
+        "compliance_burden": [3, "M"],
+        "operational_complexity": [4, "M"]
+      },
+      "gates": [
+        {"issue": "Legal (chemical): moisture indicator must be confirmed cobalt-free; UK REACH status of the indicator dye not checked", "severity": "blocking", "resolved": false}
+      ]
+    },
+    {
+      "name": "Garden kneeler and seat",
+      "scores": {
+        "unit_economics": [1, "L"],
+        "demand_quality": [3, "L"],
+        "competition_entry": [3, "M"],
+        "differentiation": [2, "M"],
+        "capital_requirements": [2, "L"],
+        "sourcing_reliability": [1, "L"],
+        "growth_potential": [2, "L"],
+        "compliance_burden": [3, "M"],
+        "operational_complexity": [2, "M"]
+      },
+      "gates": [
+        {"issue": "Safety: load-bearing seat; collapse risk and load rating evidence not assessed", "severity": "blocking", "resolved": false}
+      ]
+    }
+  ]
+}

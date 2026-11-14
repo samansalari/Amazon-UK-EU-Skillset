@@ -1,0 +1,31 @@
+Field,Supplier A,Supplier B,Supplier C,Notes
+Quote date and validity,,,,
+Legal entity (as on licence),,,,
+Entity verified? (how / by whom),,,,SUPPLIER until independently checked
+Manufacturer or trading company (evidence),,,,
+Currency,,,,
+Incoterm and named port/place,,,,Normalise all to the same Incoterm before comparing
+Unit price @ qty break 1,,,,
+Unit price @ qty break 2,,,,
+Unit price @ qty break 3,,,,
+MOQ (customised),,,,
+Price includes,,,,
+Price excludes,,,,
+Customisation cost per unit,,,,
+Packaging cost per unit,,,,
+One-off tooling / set-up,,,,Who owns the tooling?
+Sample cost + courier,,,,Credited on order?
+Sample lead time (days),,,,
+Production lead time (days),,,,
+Payment terms (deposit / balance / method),,,,
+Payment protection available,,,,
+Packaged unit L x W x H (cm),,,,Measure the sample yourself
+Packaged unit weight (g),,,,Measure the sample yourself
+Carton L x W x H (cm) / gross kg / units per carton,,,,
+Certificates / test reports supplied,,,,
+Report verified with issuing lab? (date),,,,
+Accepts third-party inspection?,,,,
+Defect remedy offered,,,,
+Sample result (pass / fail + notes),,,,
+Red flags,,,,
+Landed cost per sellable unit (from unit_economics.py),,,,Compare on this - not unit price

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Amazon UK/EU"
+  short_description: "UK/EU private-label buying decisions"
+  brand_color: "#C56A32"
+  default_prompt: "Use $amazon to show the current Amazon UK/EU research status and the single next buying step."

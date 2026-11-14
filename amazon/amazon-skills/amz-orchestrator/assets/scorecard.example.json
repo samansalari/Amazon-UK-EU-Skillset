@@ -1,0 +1,39 @@
+{
+  "_note": "EXAMPLE STRUCTURE ONLY - placeholder candidates, not research. Scores are [0-5, evidence H|M|L]; 5 is always favourable.",
+  "min_score": 50,
+  "min_confidence": 0.6,
+  "candidates": [
+    {
+      "name": "Example candidate A",
+      "scores": {
+        "unit_economics": [3, "M"],
+        "demand_quality": [4, "M"],
+        "competition_entry": [3, "H"],
+        "differentiation": [4, "H"],
+        "capital_requirements": [4, "M"],
+        "sourcing_reliability": [2, "L"],
+        "growth_potential": [3, "L"],
+        "compliance_burden": [4, "M"],
+        "operational_complexity": [4, "H"]
+      },
+      "gates": [
+        {"issue": "Supplier test report not yet verified with issuing lab", "severity": "blocking", "resolved": false}
+      ]
+    },
+    {
+      "name": "Example candidate B",
+      "scores": {
+        "unit_economics": [4, "L"],
+        "demand_quality": [5, "L"],
+        "competition_entry": [4, "L"],
+        "differentiation": [3, "L"],
+        "capital_requirements": [4, "L"],
+        "sourcing_reliability": [3, "L"],
+        "growth_potential": [4, "L"],
+        "compliance_burden": [3, "L"],
+        "operational_complexity": [4, "L"]
+      },
+      "gates": []
+    }
+  ]
+}

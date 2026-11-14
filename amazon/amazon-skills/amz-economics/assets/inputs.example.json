@@ -1,0 +1,79 @@
+{
+  "_note": "ILLUSTRATIVE NUMBERS ONLY - not real fees, duty or quotes. Replace every value and record its source. Keys starting with _ are comments.",
+
+  "_tax": "vat_registered flips revenue (ex VAT vs gross), import VAT (recoverable vs cost) and VAT on Amazon fees/ads. postponed_vat_accounting affects cash only.",
+  "vat_registered": true,
+  "vat_rate": 0.20,
+  "postponed_vat_accounting": true,
+  "_vat_threshold": "Used only by --vat-compare. Take the current figure from gov.uk/register-for-vat and record the date in sources.",
+  "vat_threshold_gbp": 90000,
+
+  "_purchase": "Supplier currency per unit; fx is GBP per 1 unit of supplier currency at spot; fx_and_payment_fee_pct is bank/platform margin on top.",
+  "order_units": 1000,
+  "unit_cost_supplier_ccy": 4.00,
+  "packaging_customisation_supplier_ccy": 0.00,
+  "fx_gbp_per_supplier_ccy": 0.80,
+  "fx_and_payment_fee_pct": 0.00,
+
+  "_import": "Per order, GBP. duty_rate from the UK tariff for the exact commodity code and origin (include any additional duty). If NOT VAT-registered, enter UK service costs VAT-inclusive.",
+  "freight_insurance_gbp": 500,
+  "duty_rate": 0.05,
+  "clearance_brokerage_gbp": 100,
+  "uk_transport_gbp": 100,
+  "inspection_gbp": 115,
+  "prep_per_unit_gbp": 0.00,
+  "unsellable_rate": 0.00,
+  "contingency_pct_of_landed": 0.00,
+
+  "_selling": "selling_price_gbp is the VAT-inclusive list price. promo_discount_pct is the average discount across ALL units (e.g. 10% voucher redeemed on half of orders = 0.05). Fees ex VAT from the current rate card. fulfilment_fee_gbp is the FBA fee, or your own pick/pack/postage for FBM.",
+  "selling_price_gbp": 24.00,
+  "promo_discount_pct": 0.00,
+  "promo_fee_per_unit_gbp": 0.00,
+  "referral_rate": 0.15,
+  "referral_min_gbp": 0.00,
+  "fulfilment_fee_gbp": 3.00,
+  "other_amazon_fees_per_unit_gbp": 0.00,
+  "storage_per_unit_month_gbp": 0.00,
+  "months_in_storage": 0,
+  "return_rate": 0.10,
+  "resellable_return_frac": 0.5,
+  "return_cost_per_returned_unit_gbp": 1.00,
+  "tacos": 0.10,
+  "min_profit_per_unit_gbp": 4.00,
+  "_ceiling": "target_margin = contribution after ads / net revenue. Used only by --ceiling (stage 2, before a quote exists); unit_cost_supplier_ccy may be left at 0 for that run.",
+  "target_margin": 0.15,
+
+  "_business": "monthly_units is an ASSUMED sales rate until measured. one_off costs (samples, tooling, photography, testing, trade mark) and launch_ad_budget count towards cash, not unit profit.",
+  "monthly_overheads_gbp": 150,
+  "monthly_units": 304,
+  "one_off_costs_gbp": 500,
+  "launch_ad_budget_gbp": 300,
+  "cash_reserve_gbp": 0,
+
+  "_timing": "Days. deposit_pct paid at order; balance assumed paid at shipment.",
+  "production_days": 30,
+  "transit_days": 40,
+  "deposit_pct": 0.3,
+  "payout_delay_days": 14,
+  "safety_days": 10,
+
+  "scenarios": {
+    "conservative": {"selling_price_gbp": 21.99, "return_rate": 0.14, "tacos": 0.15, "freight_insurance_gbp": 650, "fx_gbp_per_supplier_ccy": 0.84, "monthly_units": 180, "target_margin": 0.10},
+    "base": {},
+    "optimistic": {"tacos": 0.07, "return_rate": 0.07, "monthly_units": 400}
+  },
+
+  "sources": {
+    "_format": "field: label, source, date - e.g. duty_rate: OBS, gov.uk trade tariff commodity 3924900090 origin CN, 2026-11-13",
+    "unit_cost_supplier_ccy": "EXAMPLE - replace",
+    "fx_gbp_per_supplier_ccy": "EXAMPLE - replace",
+    "freight_insurance_gbp": "EXAMPLE - replace",
+    "duty_rate": "EXAMPLE - replace",
+    "selling_price_gbp": "EXAMPLE - replace",
+    "referral_rate": "EXAMPLE - replace",
+    "fulfilment_fee_gbp": "EXAMPLE - replace",
+    "return_rate": "EXAMPLE - replace",
+    "tacos": "EXAMPLE - replace",
+    "monthly_units": "EXAMPLE - replace"
+  }
+}
